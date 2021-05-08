@@ -14,7 +14,7 @@ var server = http.createServer(app);
 var request = require("request");
 
 app.get('/', (req, res) => {
-  res.send("Home page. Server running okay.");
+  res.send("Home page. Server running ok===========ay.");
 });
 
 app.get('/webhook', function(req, res) { // Đây là path để validate tooken bên app facebook gửi qua
