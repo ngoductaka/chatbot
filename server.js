@@ -45,6 +45,7 @@ app.post('/webhook', function (req, res) { // Phần sử lý tin nhắn của n
 
 // Đây là function dùng api của facebook để gửi tin nhắn
 function sendMessage(senderId, message) {
+    console.log('senderId, message', senderId, message)
     request({
         url: 'https://graph.facebook.com/v2.6/me/messages',
         qs: {
