@@ -1,5 +1,5 @@
 const APP_SECRET = '2065a9ef991d5f3743c6ff4885ceb3a1';
-const VALIDATION_TOKEN = 'TokenTuyChon';
+const VALIDATION_TOKEN = 'dnd123';
 const PAGE_ACCESS_TOKEN = 'EAALuerCFvAsBANaiNJtxZBsX0VQbHLfnHz8Cnz5ancvmZBDrbltsn4ilgxXg68ZCbQhfWK0uCceT2OtV1rF05muKdcZCe4LJ00ZCO77YhZBL2sZAZAD8KKbjQwatg3uZA3ybxCwISaLO7ok60HvwJzxrrrduCMckcryIze596EP4bZC8mOyO6aQ9sz';
 
 var http = require('http');
@@ -10,6 +10,8 @@ var app = express();
 app.use(bodyParser.urlencoded({
     extended: false
 }));
+app.use(bodyParser.json());
+
 var server = http.createServer(app);
 var request = require("request");
 
@@ -18,11 +20,13 @@ app.get('/', (req, res) => {
 });
 
 app.get('/webhook', function (req, res) { // Đây là path để validate tooken bên app facebook gửi qua
+    console.log('ssssss', req.query['hub.verify_token'], req.query)
     if (req.query['hub.verify_token'] === VALIDATION_TOKEN) {
         console.log(12345)
-        res.send(req.query['hub.challenge']);
-    }
-    res.send('Error, wrong validation token');
+        // res.send(req.query['hub.challenge']);
+        res.status(200).send(req.query['hub.challenge']);
+    } else
+        res.send('Error, wrong validation token');
 });
 
 app.post('/webhook', function (req, res) { // Phần sử lý tin nhắn của người dùng gửi đến
